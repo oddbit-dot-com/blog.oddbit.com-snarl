@@ -1,0 +1,37 @@
+import json
+import pytest
+
+testinfra_hosts = ['ansible://ovn_central']
+
+ports = {
+    ('port1', 'c0:ff:ee:00:00:11'),
+    ('port2', 'c0:ff:ee:00:00:12'),
+    ('port3', 'c0:ff:ee:00:00:13'),
+}
+
+
+def test_net0_exists(host):
+    res = host.run('ovn-nbctl list logical_switch net0')
+    assert res.exit_status == 0
+
+
+@pytest.mark.parametrize('port', ['port1', 'port2', 'port3'])
+def test_port_exists(host, port):
+    res = host.run(f'ovn-nbctl list logical_switch_port {port}')
+    assert res.exit_status == 0
+
+
+@pytest.mark.parametrize('port,mac', ports)
+def test_port_mac(host, port, mac):
+    res = host.run(f'ovn-nbctl --columns=name,address -f json '
+                   f'list logical_switch_port {port}')
+    assert res.exit_status == 0
+    data = json.loads(res.stdout)
+    data = dict(data['data'])
+    assert data[port].split()[0] == mac
+
+
+@pytest.mark.parametrize('port', ['port1', 'port2', 'port3'])
+def test_port_bound(host, port):
+    res = host.run(f'ovn-sbctl -t 5 list port_binding {port}')
+    assert res.exit_status == 0

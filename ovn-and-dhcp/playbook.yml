@@ -1,0 +1,37 @@
+- name: perform common configuration
+  hosts: ovn
+  tasks:
+    - script: configure-common.sh
+
+- name: configure controller
+  hosts: ovn_central
+  tasks:
+    - script: configure-controller.sh
+
+- name: connect nodes to controller
+  hosts: ovn
+  tasks:
+    - script: connect-to-controller.sh
+
+- name: create logical network
+  hosts: ovn_central
+  tasks:
+    - script: create-network.sh
+
+- name: create ports on ovn1
+  tags: [ports]
+  hosts: ovn1
+  tasks:
+    - script: create-port1.sh
+    - script: create-port2.sh
+
+- name: create ports on ovn2
+  tags: [ports]
+  hosts: ovn2
+  tasks:
+    - script: create-port3.sh
+
+- name: test environment
+  hosts: localhost
+  tasks:
+    - command: pytest
