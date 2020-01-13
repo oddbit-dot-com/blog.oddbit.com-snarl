@@ -43,9 +43,9 @@ This post assumes that you are logged in to your system as the `root` user. Most
 
 ## Concepts
 
-OVN operates with a pair of databases. The *Northbound* database contains the *logical* structure of your networks: this is where you define switches, routers, ports, and so on.
+OVN operates with a pair of databases. The _Northbound_ database contains the _logical_ structure of your networks: this is where you define switches, routers, ports, and so on.
 
-The *Southbound* database is concerned with the *physical* structure of your network. This database maintains information about which ports are realized on which hosts.
+The _Southbound_ database is concerned with the _physical_ structure of your network. This database maintains information about which ports are realized on which hosts.
 
 The [`ovn-northd`][ovn-northd] service "translates  the logical network configuration in terms of conventional network concepts, taken from the OVN  North‐ bound  Database,  into  logical datapath flows in the OVN Southbound Database below it." ([ovn-architecture(7)][])
 
@@ -71,7 +71,7 @@ This article assumes a test environment with three nodes running Fedora 31. All 
 
 Our first step will be to activate `openvswitch` and `ovn-controller` on all of the nodes in our test environment. On all nodes, run the following command:
 
-```:enable_common_services
+```=enable_common_services
 systemctl enable --now openvswitch ovn-controller
 ```
 
@@ -79,30 +79,30 @@ The `--now` flag causes `systemd` to start the service as well as enabling it in
 
 By default, OVN manages an `openvswitch` bridge named `br-int` (for "integration"). We'll need to create this on all of our nodes. On all nodes, run:
 
-```:add_br_int
+```=add_br_int
 ovs-vsctl add-br br-int
 ```
 
-<!-- file configure-common.sh
+```=configure-common.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|enable_common_services|
-|add_br_int|
--->
+<<enable_common_services>>
+<<add_br_int>>
+```
 
 ## Configuring the controller
 
 We will designate the node `ovn0` as our controller (which simply means "this node will run `ovn-northd`). The first thing we need to do is enable the `ovn-northd` service. On node `ovn0`, run:
 
-```:enable_northd
+```=enable_northd
 systemctl enable --now ovn-northd
 ```
 
 In addition to starting the `ovn-northd` service itself, this will also starts two instances of [`ovsdb-server`][ovsdb-server]: one serving the Northbound database, listening on `/run/ovn/ovnnb_db.sock`, and the second for the Southbound database, listening on `/run/ovn/ovnsb_db.sock`. In order for the `ovn-controller` service on the other nodes to connect to the Southbound database, we will need to configure that instance of `ovsdb-server` to listen for tcp connections.  We can do that using the `ovn-sbctl set-connection` command:
 
-```:set_sb_connection
+```=set_sb_connection
 ovn-sbctl set-connection ptcp:6642
 ```
 
@@ -126,7 +126,7 @@ Now that we have our controller configured, we have to connect the `ovn-controll
 
 On all nodes, run the following command:
 
-```:configure_ovs_external_ids
+```=configure_ovs_external_ids
 ovs-vsctl set open_vswitch .  \
   external_ids:ovn-remote=tcp:192.168.122.100:6642 \
   external_ids:ovn-encap-ip=$(ip addr show eth0 | awk '$1 == "inet" {print $2}' | cut -f1 -d/) \
@@ -168,18 +168,18 @@ f0087676-7f93-419c-9da0-32321d2d3668
 
 Due to what appears to be some sort of race condition in OVN, you may not see the geneve tunnels in the `ovs-vsctl show` output.  If this is the case, restart `ovn-controller` on your ovn nodes:
 
-```:restart_ovn_controller
+```=restart_ovn_controller
 systemctl restart ovn-controller
 ```
 
-<!-- file connect-to-controller.sh
+```=connect-to-controller.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|configure_ovs_external_ids|
-|restart_ovn_controller|
--->
+<<configure_ovs_external_ids>>
+<<restart_ovn_controller>>
+```
 
 # Creating a virtual network
 
@@ -189,7 +189,7 @@ Now that we have a functioning OVN environment, we're ready to create our virtua
 
 We'll start by creating a logical switch, which we will call `net0`. We create that using the `ovn-nbctl ls-add` command. Run the following on `ovn0`:
 
-```:add_net0
+```=add_net0
 ovn-nbctl ls-add net0
 ```
 
@@ -204,7 +204,7 @@ Next, we need to set some configuration options on the switch that will be used 
 
 To apply these settings, run the following commands on `ovn0`:
 
-```:configure_net0
+```=configure_net0
 ovn-nbctl set logical_switch net0 \
   other_config:subnet="10.0.0.0/24" \
   other_config:exclude_ips="10.0.0.1..10.0.0.10"
@@ -228,19 +228,19 @@ We also need to set the CIDR range that will be served by the DHCP server.
 
 We can create the appropriate options using the `ovn-nbctl dhcp-options-create` command. Run the following on `ovn0`:
 
-```:create_dhcp_options
+```=create_dhcp_options
 ovn-nbctl dhcp-options-create 10.0.0.0/24
 ```
 
 Despite the name of that command, it doesn't actually let us set DHCP options. For that, we need to first look up the uuid of our newly created entry in the `dhcp_options` table. Let's store that in the `CIDR_UUID` variable, which we will use in a few places in the remainder of this post:
 
-```:get_dhcp_options_uuid
+```=get_dhcp_options_uuid
 CIDR_UUID=$(ovn-nbctl --bare --columns=_uuid find dhcp_options cidr="10.0.0.0/24")
 ```
 
 With that uuid in hand, we can now set the required options:
 
-```:set_dhcp_options
+```=set_dhcp_options
 ovn-nbctl dhcp-options-set-options ${CIDR_UUID} \
   lease_time=3600 \
   router=10.0.0.1 \
@@ -278,13 +278,13 @@ Let's add the following three logical ports to the switch:
 
 For each port, we'll need to run three commands. First, we create the port on the switch:
 
-```:add_port1
+```=add_port1
 ovn-nbctl lsp-add net0 port1
 ```
 
 Next, we set the port addresses. For this example, I'm using static MAC addresses and dynamic (assigned by DHCP) IP addresses, so the command will look like:
 
-```:set_port1_addresses
+```=set_port1_addresses
 ovn-nbctl lsp-set-addresses port1 "c0:ff:ee:00:00:11 dynamic"
 ```
 
@@ -296,13 +296,13 @@ ovn-nbctl lsp-set-addresses port1 "dynamic"
 
 Finally, we associate the port with the DHCP options we created in the previous section:
 
-```:set_port1_dhcp_options
+```=set_port1_dhcp_options
 ovn-nbctl lsp-set-dhcpv4-options port1 $CIDR_UUID
 ```
 
 Repeat the above sequence for `port2` and `port3`:
 
-```:add_remaining_ports
+```=add_remaining_ports
 ovn-nbctl lsp-add net0 port2
 ovn-nbctl lsp-set-addresses port2 "c0:ff:ee:00:00:12 dynamic"
 ovn-nbctl lsp-set-dhcpv4-options port2 $CIDR_UUID
@@ -355,28 +355,28 @@ dynamic_addresses   : "c0:ff:ee:00:00:11 10.0.0.11"
 dynamic_addresses   : "c0:ff:ee:00:00:12 10.0.0.12"
 ```
 
-<!-- file configure-controller.sh
+```=configure-controller.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|enable_northd|
-|set_sb_connection|
--->
+<<enable_northd>>
+<<set_sb_connection>>
+```
 
-<!-- file create-network.sh
-|add_net0|
-|configure_net0|
+```=create-network.sh --file --hide
+<<add_net0>>
+<<configure_net0>>
 
-|create_dhcp_options|
-|get_dhcp_options_uuid|
-|set_dhcp_options|
+<<create_dhcp_options>>
+<<get_dhcp_options_uuid>>
+<<set_dhcp_options>>
 
-|add_port1|
-|set_port1_addresses|
-|set_port1_dhcp_options|
-|add_remaining_ports|
--->
+<<add_port1>>
+<<set_port1_addresses>>
+<<set_port1_dhcp_options>>
+<<add_remaining_ports>>
+```
 
 ## Simulating a DHCP request with ovn-trace
 
@@ -435,7 +435,7 @@ In this section, we will attach network interfaces to our logical switch and dem
 
 On host `ovn1`, let's create port `port1`. We'll want to ensure that (a) the MAC address of this port matches the MAC address we configured earlier (`c0:ff:ee:00:00:11`), and we need to make sure that the `iface-id` external id matches the port name we registered in the Northbound database. We can do that with the following command:
 
-```:create_port1
+```=create_port1
 ovs-vsctl add-port br-int port1 -- \
   set interface port1 \
     type=internal \
@@ -493,7 +493,7 @@ Chassis ovn2
 
 We can now try to configure this interface with DHCP. Let's first move the interface into a network namespace; this means we don't need to worry about messing up routing on the host. We'll create a namespace named `vm1` and make `port1` part of that namespace:
 
-```:port1_to_netns
+```=port1_to_netns
 ip netns add vm1
 ip link set netns vm1 port1
 ip -n vm1 addr add 127.0.0.1/8 dev lo
@@ -502,19 +502,19 @@ ip -n vm1 link set lo up
 
 We can now configure the interface using DHCP by running the `dhclient` command:
 
-```:port1_run_dhclient
+```=port1_run_dhclient
 ip netns exec vm1 dhclient -v -i port1 --no-pid
 ```
 
-<!-- file create-port1.sh
+```=create-port1.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|create_port1|
-|port1_to_netns|
-|port1_run_dhclient|
--->
+<<create_port1>>
+<<port1_to_netns>>
+<<port1_run_dhclient>>
+```
 
 After `dhclient` goes to the background, we see that it was able to successfully request an address:
 
@@ -552,7 +552,7 @@ And it has correctly configured the interface:
 
 Let's repeat the above process with `port2`, again using host `ovn1`. First we add the port:
 
-```:create_port2
+```=create_port2
 ovs-vsctl add-port br-int port2 -- \
   set interface port2 \
     type=internal \
@@ -562,7 +562,7 @@ ovs-vsctl add-port br-int port2 -- \
 
 Add it to a namespace:
 
-```:port2_to_netns
+```=port2_to_netns
 ip netns add vm2
 ip link set netns vm2 port2
 ip -n vm2 addr add 127.0.0.1/8 dev lo
@@ -571,19 +571,19 @@ ip -n vm2 link set lo up
 
 Configure it using `dhclient`:
 
-```:port2_run_dhclient
+```=port2_run_dhclient
 ip netns exec vm2 dhclient -v -i port2 --no-pid
 ```
 
-<!-- file create-port2.sh
+```=create-port2.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|create_port2|
-|port2_to_netns|
-|port2_run_dhclient|
--->
+<<create_port2>>
+<<port2_to_netns>>
+<<port2_run_dhclient>>
+```
 
 And finally look at the OVN port bindings on `ovn0`:
 
@@ -612,7 +612,7 @@ Chassis ovn2
 
 Lastly, let's repeat the above process for `port3` on host `ovn2`.
 
-```:create_port3
+```=create_port3
 ovs-vsctl add-port br-int port3 -- \
   set interface port3 \
     type=internal \
@@ -649,13 +649,13 @@ Chassis ovn2
     Port_Binding port3
 ```
 
-<!-- file create-port3.sh
+```=create-port3.sh --file --hide
 #!/bin/sh
 
 set -e
 
-|create_port3|
--->
+<<create_port3>>
+```
 
 ## Verify connectivity
 
