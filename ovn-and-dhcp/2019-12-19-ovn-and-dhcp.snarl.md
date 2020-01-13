@@ -84,10 +84,6 @@ ovs-vsctl add-br br-int
 ```
 
 ```=configure-common.sh --file --hide
-#!/bin/sh
-
-set -e
-
 <<enable_common_services>>
 <<add_br_int>>
 ```
@@ -173,10 +169,6 @@ systemctl restart ovn-controller
 ```
 
 ```=connect-to-controller.sh --file --hide
-#!/bin/sh
-
-set -e
-
 <<configure_ovs_external_ids>>
 <<restart_ovn_controller>>
 ```
@@ -356,10 +348,6 @@ dynamic_addresses   : "c0:ff:ee:00:00:12 10.0.0.12"
 ```
 
 ```=configure-controller.sh --file --hide
-#!/bin/sh
-
-set -e
-
 <<enable_northd>>
 <<set_sb_connection>>
 ```
@@ -507,10 +495,6 @@ ip netns exec vm1 dhclient -v -i port1 --no-pid
 ```
 
 ```=create-port1.sh --file --hide
-#!/bin/sh
-
-set -e
-
 <<create_port1>>
 <<port1_to_netns>>
 <<port1_run_dhclient>>
@@ -576,10 +560,6 @@ ip netns exec vm2 dhclient -v -i port2 --no-pid
 ```
 
 ```=create-port2.sh --file --hide
-#!/bin/sh
-
-set -e
-
 <<create_port2>>
 <<port2_to_netns>>
 <<port2_run_dhclient>>
@@ -612,7 +592,7 @@ Chassis ovn2
 
 Lastly, let's repeat the above process for `port3` on host `ovn2`.
 
-```=create_port3
+```=create-port3.sh --file
 ovs-vsctl add-port br-int port3 -- \
   set interface port3 \
     type=internal \
@@ -647,14 +627,6 @@ Chassis ovn2
         ip: "192.168.122.102"
         options: {csum="true"}
     Port_Binding port3
-```
-
-```=create-port3.sh --file --hide
-#!/bin/sh
-
-set -e
-
-<<create_port3>>
 ```
 
 ## Verify connectivity
