@@ -162,11 +162,16 @@ f0087676-7f93-419c-9da0-32321d2d3668
     ovs_version: "2.12.0"
 ```
 
-Due to what appears to be some sort of race condition in OVN, you may not see the geneve tunnels in the `ovs-vsctl show` output.  If this is the case, restart `ovn-controller` on your ovn nodes:
+Due to what appears to be [some sort of race condition in OVN][bug-geneve], you may not see the geneve tunnels in the `ovs-vsctl show` output.  If this is the case, restart `ovn-controller` on all your ovn nodes:
 
 ```=restart_ovn_controller
 systemctl restart ovn-controller
 ```
+
+The issue with the geneve tunnels appears to be resolved by [this patch][], which will hopefully land in OVN in the near future.
+
+[bug-geneve]: https://mail.openvswitch.org/pipermail/ovs-discuss/2020-January/049692.html
+[this patch]: https://patchwork.ozlabs.org/patch/1222380/
 
 ```=connect-to-controller.sh --file --hide
 <<configure_ovs_external_ids>>
@@ -650,6 +655,7 @@ I hope this post helps you understand how to set up a simple OVN environment wit
 ## Thanks to
 
 - [Lorenzo Bianconi](https://github.com/LorenzoBianconi) for helping sort this out over email.
+- [Han Zhou](https://twitter.com/zhouhanok) for helping solve the issue around Geneve tunnels coming up appropriately.
 
 ## See also
 
