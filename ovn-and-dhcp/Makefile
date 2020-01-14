@@ -14,6 +14,7 @@ FILES = $(shell snarl files $(SRC))
 
 all: $(MDDOC) $(FILES) $(HTMLDOC)
 
+.NOTPARALLEL: $(FILES)
 $(FILES): 2019-12-19-ovn-and-dhcp.snarl.md
 	snarl -v tangle -w $<
 
