@@ -1,26 +1,36 @@
+- hosts: localhost
+  tasks:
+    - command: vagrant up
+    - meta: refresh_inventory
+
 - name: perform common configuration
   hosts: ovn
+  become: true
   tasks:
     - script: configure-common.sh
 
 - name: configure controller
   hosts: ovn_central
+  become: true
   tasks:
     - script: configure-controller.sh
 
 - name: connect nodes to controller
   hosts: ovn
+  become: true
   tasks:
     - script: connect-to-controller.sh
 
 - name: create logical network
   hosts: ovn_central
+  become: true
   tasks:
     - script: create-network.sh
 
 - name: create ports on ovn1
   tags: [ports]
   hosts: ovn1
+  become: true
   tasks:
     - script: create-port1.sh
     - script: create-port2.sh
@@ -28,10 +38,12 @@
 - name: create ports on ovn2
   tags: [ports]
   hosts: ovn2
+  become: true
   tasks:
     - script: create-port3.sh
 
 - name: test environment
   hosts: localhost
+  tags: [test]
   tasks:
     - command: pytest
