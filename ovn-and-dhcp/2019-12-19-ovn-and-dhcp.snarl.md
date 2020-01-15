@@ -122,7 +122,7 @@ Now that we have our controller configured, we have to connect the `ovn-controll
 
 On all nodes, run the following command:
 
-```=configure_ovs_external_ids
+```=configure_ovs_external_ids --replace 192.168.122.100 ${OVN0_ADDRESS}
 ovs-vsctl set open_vswitch .  \
   external_ids:ovn-remote=tcp:192.168.122.100:6642 \
   external_ids:ovn-encap-ip=$(ip addr show eth0 | awk '$1 == "inet" {print $2}' | cut -f1 -d/) \

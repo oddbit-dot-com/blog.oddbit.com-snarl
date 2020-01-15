@@ -1,4 +1,5 @@
 import pytest
+import re
 
 testinfra_hosts = ['ansible://ovn']
 
@@ -17,7 +18,7 @@ def test_ovn_remote(host):
     with host.sudo():
         res = host.run('ovs-vsctl get open_vswitch . external_ids:ovn-remote')
         assert res.exit_status == 0
-        assert 'tcp:192.168.122.100:6642' in res.stdout
+        assert re.search(r'tcp:[\d.]+:6642', res.stdout)
 
 
 def test_ovs_errors(host):

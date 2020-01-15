@@ -27,6 +27,8 @@
   become: true
   tasks:
     - script: connect-to-controller.sh
+      environment:
+        OVN0_ADDRESS: "{{ hostvars.ovn0.ansible_default_ipv4.address }}"
 
 - name: create logical network
   hosts: ovn_central
