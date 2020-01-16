@@ -1,7 +1,14 @@
 - hosts: localhost
   tasks:
-    - command: vagrant up
+    - name: clear ssh-agent identities
+      command: ssh-add -D
+    - name: bring up vagrant environment
+      command: vagrant up
     - meta: refresh_inventory
+    - name: ensure scripts are available
+      make:
+        chdir: .
+        target: all
 
 - name: perform common configuration
   hosts: ovn
