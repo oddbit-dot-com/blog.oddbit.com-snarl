@@ -83,7 +83,7 @@ By default, OVN manages an `openvswitch` bridge named `br-int` (for "integration
 ovs-vsctl add-br br-int
 ```
 
-```=configure-common.sh --file --hide
+```=configure-common.sh --file --hide -t setup
 <<enable_common_services>>
 <<add_br_int>>
 ```
@@ -173,7 +173,7 @@ The issue with the geneve tunnels appears to be resolved by [this patch][], whic
 [bug-geneve]: https://mail.openvswitch.org/pipermail/ovs-discuss/2020-January/049692.html
 [this patch]: https://patchwork.ozlabs.org/patch/1222380/
 
-```=connect-to-controller.sh --file --hide
+```=connect-to-controller.sh --file --hide -t setup
 <<configure_ovs_external_ids>>
 <<restart_ovn_controller>>
 ```
@@ -352,12 +352,12 @@ dynamic_addresses   : "c0:ff:ee:00:00:11 10.0.0.11"
 dynamic_addresses   : "c0:ff:ee:00:00:12 10.0.0.12"
 ```
 
-```=configure-controller.sh --file --hide
+```=configure-controller.sh --file --hide -t setup
 <<enable_northd>>
 <<set_sb_connection>>
 ```
 
-```=create-network.sh --file --hide
+```=create-network.sh --file --hide -t network
 <<add_net0>>
 <<configure_net0>>
 
@@ -499,7 +499,7 @@ We can now configure the interface using DHCP by running the `dhclient` command:
 ip netns exec vm1 dhclient -v -i port1 --no-pid
 ```
 
-```=create-port1.sh --file --hide
+```=create-port1.sh --file --hide -t ports
 <<create_port1>>
 <<port1_to_netns>>
 <<port1_run_dhclient>>
@@ -564,7 +564,7 @@ Configure it using `dhclient`:
 ip netns exec vm2 dhclient -v -i port2 --no-pid
 ```
 
-```=create-port2.sh --file --hide
+```=create-port2.sh --file --hide -t ports
 <<create_port2>>
 <<port2_to_netns>>
 <<port2_run_dhclient>>
@@ -597,7 +597,7 @@ Chassis ovn2
 
 Lastly, let's repeat the above process for `port3` on host `ovn2`.
 
-```=create-port3.sh --file
+```=create-port3.sh --file -t ports
 ovs-vsctl add-port br-int port3 -- \
   set interface port3 \
     type=internal \
