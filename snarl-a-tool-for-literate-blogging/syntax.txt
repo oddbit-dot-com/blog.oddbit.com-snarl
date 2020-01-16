@@ -1,0 +1,4 @@
+```[<language>]=<label> [--file] [--hide] [--tag tag [...]] [--replace
+<pattern> <substitution>]
+...code goes here...
+```
