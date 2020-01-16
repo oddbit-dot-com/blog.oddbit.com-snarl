@@ -10,7 +10,7 @@ FILES = $(shell snarl files $(SRC))
 	snarl weave -o $@ $<
 
 %.html: %.md
-	pandoc -o $@ $<
+	pandoc $(PANDOCFLAGS) -s -o $@ $<
 
 all: $(MDDOC) $(FILES) $(HTMLDOC)
 
