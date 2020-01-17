@@ -1,4 +1,0 @@
-```=configure-common.sh --file --hide -t setup
-<<enable_common_services>>
-<<add_br_int>>
-```

@@ -12,7 +12,7 @@ POSTS = $(HOME)/projects/blog.oddbit.com-hugo/content/post/
 
 all: $(MDDOC) $(HTMLDOC)
 
-$(MDDOC): $(SRC) hello.c hello.md replace-example.txt syntax.txt tag-example.txt
+$(MDDOC): $(SRC) hello.c hello.md
 	snarl weave -o $@ $<
 
 install: all

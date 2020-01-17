@@ -37,9 +37,10 @@ Since I couldn't find a tool that did exactly what I wanted, I ended up writing 
 
 The heart of Snarl is the code block, which uses an extended form of the standard Markdown fenced code block:
 
-<pre>
-<!-- include syntax.txt -ve -->
-</pre>
+    ```[<language>]=<label> [--file] [--hide] [--tag tag [...]] [--replace
+    <pattern> <substitution>]
+    ...code goes here...
+    ```
 
 The `<language>` information is optional and is ignored by Snarl; this is standard syntax for providing syntax coloring hints for fenced code blocks. The value is passed on to the rendered Markdown when running `snarl weave`.
 
@@ -95,9 +96,13 @@ The [source][] to my earlier blog post on [OVN and DHCP][] provides a less contr
 
 That post provides an example of using the `--replace` flag on a code block. For the purposes of the article, I was using fixed IP addresses for the nodes involved, but when setting up a virtual environment for testing it was easier to just let the nodes pick up addresses dynamically. In order to test the code that uses a static ip address, I replace that address with a variable reference when generating the script files:
 
-<pre>
-<!-- include replace-example.txt -ve -->
-</pre>
+    ```=configure_ovs_external_ids --replace 192.168.122.100 ${OVN0_ADDRESS}
+    ovs-vsctl set open_vswitch .  \
+      external_ids:ovn-remote=tcp:192.168.122.100:6642 \
+      external_ids:ovn-encap-ip=$(ip addr show eth0 | awk '$1 == "inet" {print $2}' | cut -f1 -d/) \
+      external_ids:ovn-encap-type=geneve \
+      external_ids:system-id=$(hostname)
+    ```
 
 When running `snarl tangle` on that document, the above text renders as:
 
@@ -113,9 +118,10 @@ ovs-vsctl set open_vswitch .  \
 
 If you look at the files embedded in that post, you will find that they are tagged using the `--tag` (`-t`) option:
 
-<pre>
-<!-- include tag-example.txt -ve -->
-</pre>
+    ```=configure-common.sh --file --hide -t setup
+    <<enable_common_services>>
+    <<add_br_int>>
+    ```
 
 This permits me to extract a subset of files. For example, to extract just the files tagged `setup`, I would run:
 
