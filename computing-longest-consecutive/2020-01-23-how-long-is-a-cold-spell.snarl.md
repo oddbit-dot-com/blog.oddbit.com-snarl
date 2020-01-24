@@ -1,12 +1,12 @@
 ---
 date: '2020-01-23'
-filename: 2020-01-23-computing-longest-consecutive.md
+filename: 2020-01-23-how-long-is-a-cold-spell.md
 tags:
 - datascience
 - pandas
 - python
 - climate
-title: Computing longest consecutive sequence of values matching a condition
+title: How long is a cold spell in Boston?
 
 ---
 
@@ -357,8 +357,6 @@ assert max_consecutive_dbf == 7
 
 If we look at the results for the past 20 years, we see the following:
 
-{{< figure
-src="/assets/2020/01/23/sample-results.png"
->}}
+{{< figure src="/assets/2020/01/23/sample-results.png" >}}
 
 For data used in the above chart, the average stretch in which the temperature stays below freezing is 6.45 days (the average for the entire dataset is 6.33 days).
