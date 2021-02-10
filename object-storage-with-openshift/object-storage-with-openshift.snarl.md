@@ -60,18 +60,30 @@ The fundamental unit of object storage is called a "bucket".
 Creating a bucket with OCS works a bit like creating a [persistent
 volume][], although instead of starting with a `PersistentVolumeClaim`
 you instead start with an `ObjectBucketClaim` ("`OBC`"). An `OBC`
-looks something like this:
+looks something like this when using RGW:
 
 [persistent volume]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 
-```
+```yaml=obc-rgw.yml --file
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: mybucket
+  name: example-rgw
 spec:
-  generateBucketName: mybucket
+  generateBucketName: example-rgw
   storageClassName: ocs-storagecluster-ceph-rgw
+```
+
+Or like this when using Noobaa:
+
+```yaml=obc-nooba.yml --file
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: example-noobaa
+spec:
+  generateBucketName: example-noobaa
+  storageClassName: openshift-storage.noobaa.io
 ```
 
 With OCS 4.5, your out-of-the-box choices for `storageClassName` will be
@@ -148,6 +160,7 @@ spec:
             name: example-rgw
         - secretRef:
             name: example-rgw
+      [...]
 ```
 
 Note that we're also setting `AWS_CA_BUNDLE` here, which you'll need
@@ -163,16 +176,18 @@ $ aws s3 ls --endpoint $schema://$BUCKET_HOST ls
 2021-02-10 04:30:31 example-rgw-8710aa46-a47a-4a8b-8edd-7dabb7d55469
 ```
 
-Or in Python:
+Python's `boto3` module can also make use of the same environment
+variables:
 
-```
+```python
 >>> import boto3
 >>> import os
 >>> bucket_host = os.environ['BUCKET_HOST']
 >>> schema = 'http' if os.environ['BUCKET_PORT'] == 80 else 'https'
 >>> s3 = boto3.client('s3', endpoint_url=f'{schema}://{bucket_host}')
 >>> s3.list_buckets()['Buckets']
-[{'Name': 'example-noobaa-2e1bca2f-ff49-431a-99b8-d7d63a8168b0', 'CreationDate': datetime.datetime(2021, 2, 10, 13, 7, 7, tzinfo=tzlocal())}]
+[{'Name': 'example-noobaa-...', 'CreationDate': datetime.datetime(...)}]
+
 ```
 
 ## External connections to S3 endpoints
@@ -222,7 +237,7 @@ in the `ConfigMap` created for us when we provisioned the storage. We
 just need to replace the `BUCKET_HOST` with the hostname in the route,
 and we need to use port 443 regardless of what `BUCKET_PORT` tells us.
 
-```
+```python=getenv.py --file
 import argparse
 import base64
 
@@ -264,7 +279,7 @@ for k, v in env.items():
 
 This will output something like:
 
-```
+```sh
 BUCKET_HOST="s3-openshift-storage.apps.cnv.massopen.cloud"
 BUCKET_NAME="example-noobaa-2e1bca2f-ff49-431a-99b8-d7d63a8168b0"
 BUCKET_PORT="443"
