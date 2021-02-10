@@ -1,0 +1,199 @@
+3038539 execve("/usr/bin/env", ["env", "LD_PRELOAD=/home/lars/projects/blog.oddbit.com-hugo/snarl/fixing-sourceforge-sub"..., "sed", "=", "Makefile"], 0x7ffff4b23f58 /* 70 vars */) = 0
+3038539 brk(NULL)                       = 0x559c1b8f5000
+3038539 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffda906a0b0) = -1 EINVAL (Invalid argument)
+3038539 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+3038539 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0644, st_size=293804, ...}) = 0
+3038539 mmap(NULL, 293804, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f7202fe8000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260r\2\0\0\0\0\0@\0\0\0\0\0\0\0\260~0\0\0\0\0\0\0\0\0\0@\08\0\16\0@\0H\0G\0\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0"..., 832) = 832
+3038539 lseek(3, 64, SEEK_SET)          = 64
+3038539 read(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\20\3\0\0\0\0\0\0\20\3\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\200q\31\0\0\0\0\0\200q\31\0\0\0\0\0"..., 784) = 784
+3038539 lseek(3, 848, SEEK_SET)         = 848
+3038539 read(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32) = 32
+3038539 lseek(3, 880, SEEK_SET)         = 880
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0gZ\316<\240z\v\206=\360\37F\32{\t\204\306\\\2137\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=3182768, ...}) = 0
+3038539 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f7202fe6000
+3038539 lseek(3, 64, SEEK_SET)          = 64
+3038539 read(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\20\3\0\0\0\0\0\0\20\3\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\200q\31\0\0\0\0\0\200q\31\0\0\0\0\0"..., 784) = 784
+3038539 lseek(3, 848, SEEK_SET)         = 848
+3038539 read(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32) = 32
+3038539 lseek(3, 880, SEEK_SET)         = 880
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0gZ\316<\240z\v\206=\360\37F\32{\t\204\306\\\2137\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 mmap(NULL, 1868728, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f7202e1d000
+3038539 mprotect(0x7f7202e42000, 1679360, PROT_NONE) = 0
+3038539 mmap(0x7f7202e42000, 1372160, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f7202e42000
+3038539 mmap(0x7f7202f91000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x174000) = 0x7f7202f91000
+3038539 mmap(0x7f7202fdc000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1be000) = 0x7f7202fdc000
+3038539 mmap(0x7f7202fe2000, 13240, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f7202fe2000
+3038539 close(3)                        = 0
+3038539 arch_prctl(ARCH_SET_FS, 0x7f7202fe7580) = 0
+3038539 mprotect(0x7f7202fdc000, 12288, PROT_READ) = 0
+3038539 mprotect(0x559c1a109000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f720305b000, 4096, PROT_READ) = 0
+3038539 munmap(0x7f7202fe8000, 293804)  = 0
+3038539 brk(NULL)                       = 0x559c1b8f5000
+3038539 brk(0x559c1b916000)             = 0x559c1b916000
+3038539 brk(NULL)                       = 0x559c1b916000
+3038539 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0644, st_size=217990208, ...}) = 0
+3038539 mmap(NULL, 217990208, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f71f5e38000
+3038539 close(3)                        = 0
+3038539 execve("/home/lars/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/home/lars/.local/lib/npm-modules/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/home/lars/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/home/lars/.local/lib/npm-modules/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/usr/share/Modules/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/usr/lib64/ccache/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/usr/local/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/usr/local/sbin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = -1 ENOENT (No such file or directory)
+3038539 execve("/usr/bin/sed", ["sed", "=", "Makefile"], 0x559c1b8f6550 /* 71 vars */) = 0
+3038539 brk(NULL)                       = 0x55f7e84ad000
+3038539 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffcef044880) = -1 EINVAL (Invalid argument)
+3038539 openat(AT_FDCWD, "/home/lars/projects/blog.oddbit.com-hugo/snarl/fixing-sourceforge-subversion/force_open_fail.so", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000\20\0\0\0\0\0\0@\0\0\0\0\0\0\0X3\0\0\0\0\0\0\0\0\0\0@\08\0\7\0@\0\22\0\21\0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0775, st_size=14296, ...}) = 0
+3038539 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4103fba000
+3038539 mmap(NULL, 16424, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103fb5000
+3038539 mmap(0x7f4103fb6000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f4103fb6000
+3038539 mmap(0x7f4103fb7000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4103fb7000
+3038539 mmap(0x7f4103fb8000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4103fb8000
+3038539 close(3)                        = 0
+3038539 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+3038539 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0644, st_size=293804, ...}) = 0
+3038539 mmap(NULL, 293804, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4103f6d000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libacl.so.1", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\20'\0\0\0\0\0\0@\0\0\0\0\0\0\0p\266\0\0\0\0\0\0\0\0\0\0@\08\0\v\0@\0\36\0\35\0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=48624, ...}) = 0
+3038539 mmap(NULL, 41088, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103f62000
+3038539 mmap(0x7f4103f64000, 20480, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4103f64000
+3038539 mmap(0x7f4103f69000, 8192, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7f4103f69000
+3038539 mmap(0x7f4103f6b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8000) = 0x7f4103f6b000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\210\0\0\0\0\0\0@\0\0\0\0\0\0\08\331\2\0\0\0\0\0\0\0\0\0@\08\0\f\0@\0\37\0\36\0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=188664, ...}) = 0
+3038539 mmap(NULL, 181744, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103f35000
+3038539 mprotect(0x7f4103f3c000, 139264, PROT_NONE) = 0
+3038539 mmap(0x7f4103f3c000, 106496, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7f4103f3c000
+3038539 mmap(0x7f4103f56000, 28672, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x21000) = 0x7f4103f56000
+3038539 mmap(0x7f4103f5e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7f4103f5e000
+3038539 mmap(0x7f4103f60000, 5616, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4103f60000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260r\2\0\0\0\0\0@\0\0\0\0\0\0\0\260~0\0\0\0\0\0\0\0\0\0@\08\0\16\0@\0H\0G\0\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0"..., 832) = 832
+3038539 lseek(3, 64, SEEK_SET)          = 64
+3038539 read(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\20\3\0\0\0\0\0\0\20\3\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\200q\31\0\0\0\0\0\200q\31\0\0\0\0\0"..., 784) = 784
+3038539 lseek(3, 848, SEEK_SET)         = 848
+3038539 read(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32) = 32
+3038539 lseek(3, 880, SEEK_SET)         = 880
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0gZ\316<\240z\v\206=\360\37F\32{\t\204\306\\\2137\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=3182768, ...}) = 0
+3038539 lseek(3, 64, SEEK_SET)          = 64
+3038539 read(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\20\3\0\0\0\0\0\0\20\3\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\200q\31\0\0\0\0\0\200q\31\0\0\0\0\0"..., 784) = 784
+3038539 lseek(3, 848, SEEK_SET)         = 848
+3038539 read(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32) = 32
+3038539 lseek(3, 880, SEEK_SET)         = 880
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0gZ\316<\240z\v\206=\360\37F\32{\t\204\306\\\2137\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 mmap(NULL, 1868728, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103d6c000
+3038539 mprotect(0x7f4103d91000, 1679360, PROT_NONE) = 0
+3038539 mmap(0x7f4103d91000, 1372160, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f4103d91000
+3038539 mmap(0x7f4103ee0000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x174000) = 0x7f4103ee0000
+3038539 mmap(0x7f4103f2b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1be000) = 0x7f4103f2b000
+3038539 mmap(0x7f4103f31000, 13240, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4103f31000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0p\"\0\0\0\0\0\0@\0\0\0\0\0\0\0\350\205\0\0\0\0\0\0\0\0\0\0@\08\0\v\0@\0!\0 \0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=36392, ...}) = 0
+3038539 mmap(NULL, 24688, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103d65000
+3038539 mmap(0x7f4103d67000, 8192, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4103d67000
+3038539 mmap(0x7f4103d69000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x7f4103d69000
+3038539 mmap(0x7f4103d6a000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x7f4103d6a000
+3038539 mmap(0x7f4103d6b000, 112, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4103d6b000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libattr.so.1", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000%\0\0\0\0\0\0@\0\0\0\0\0\0\0\240k\0\0\0\0\0\0\0\0\0\0@\08\0\v\0@\0\35\0\34\0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=29408, ...}) = 0
+3038539 mmap(NULL, 28688, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103d5d000
+3038539 mmap(0x7f4103d5f000, 12288, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4103d5f000
+3038539 mmap(0x7f4103d62000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5000) = 0x7f4103d62000
+3038539 mmap(0x7f4103d63000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5000) = 0x7f4103d63000
+3038539 mmap(0x7f4103d64000, 16, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4103d64000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\2604\0\0\0\0\0\0@\0\0\0\0\0\0\0\310\22\t\0\0\0\0\0\0\0\0\0@\08\0\v\0@\0\35\0\34\0\1\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=596488, ...}) = 0
+3038539 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4103d5b000
+3038539 mmap(NULL, 594504, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103cc9000
+3038539 mprotect(0x7f4103ccc000, 577536, PROT_NONE) = 0
+3038539 mmap(0x7f4103ccc000, 409600, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7f4103ccc000
+3038539 mmap(0x7f4103d30000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x67000) = 0x7f4103d30000
+3038539 mmap(0x7f4103d59000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8f000) = 0x7f4103d59000
+3038539 close(3)                        = 0
+3038539 openat(AT_FDCWD, "/lib64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+3038539 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\202\0\0\0\0\0\0@\0\0\0\0\0\0\0@\370\4\0\0\0\0\0\0\0\0\0@\08\0\r\0@\0'\0&\0\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0"..., 832) = 832
+3038539 lseek(3, 824, SEEK_SET)         = 824
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\324\f\215\2477\35\212\336\244d\256+\t\225\220\262\304FUt\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 fstat(3, {st_mode=S_IFREG|0755, st_size=328192, ...}) = 0
+3038539 lseek(3, 824, SEEK_SET)         = 824
+3038539 read(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\324\f\215\2477\35\212\336\244d\256+\t\225\220\262\304FUt\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\3\0\0\0\2\0\0\0\0\0\0\0", 68) = 68
+3038539 mmap(NULL, 135616, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4103ca7000
+3038539 mmap(0x7f4103cae000, 65536, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7f4103cae000
+3038539 mmap(0x7f4103cbe000, 20480, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f4103cbe000
+3038539 mmap(0x7f4103cc3000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b000) = 0x7f4103cc3000
+3038539 mmap(0x7f4103cc5000, 12736, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4103cc5000
+3038539 close(3)                        = 0
+3038539 mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4103ca4000
+3038539 arch_prctl(ARCH_SET_FS, 0x7f4103ca4800) = 0
+3038539 mprotect(0x7f4103f2b000, 12288, PROT_READ) = 0
+3038539 mprotect(0x7f4103cc3000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103d59000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103d63000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103d6a000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103f5e000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103f6b000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103fb8000, 4096, PROT_READ) = 0
+3038539 mprotect(0x55f7e666d000, 4096, PROT_READ) = 0
+3038539 mprotect(0x7f4103fe7000, 4096, PROT_READ) = 0
+3038539 munmap(0x7f4103f6d000, 293804)  = 0
+3038539 set_tid_address(0x7f4103ca4ad0) = 3038539
+3038539 set_robust_list(0x7f4103ca4ae0, 24) = 0
+3038539 rt_sigaction(SIGRTMIN, {sa_handler=0x7f4103caec50, sa_mask=[], sa_flags=SA_RESTORER|SA_SIGINFO, sa_restorer=0x7f4103cbbb20}, NULL, 8) = 0
+3038539 rt_sigaction(SIGRT_1, {sa_handler=0x7f4103caecf0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART|SA_SIGINFO, sa_restorer=0x7f4103cbbb20}, NULL, 8) = 0
+3038539 rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+3038539 prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+3038539 statfs("/sys/fs/selinux", 0x7ffcef0447d0) = -1 ENOENT (No such file or directory)
+3038539 statfs("/selinux", 0x7ffcef0447d0) = -1 ENOENT (No such file or directory)
+3038539 brk(NULL)                       = 0x55f7e84ad000
+3038539 brk(0x55f7e84ce000)             = 0x55f7e84ce000
+3038539 openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+3038539 read(3, "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbdev\nnodev\tproc\nnodev\tcgroup\nnodev\tcgroup2\nnodev\tc"..., 1024) = 393
+3038539 read(3, "", 1024)               = 0
+3038539 close(3)                        = 0
+3038539 access("/etc/selinux/config", F_OK) = 0
+3038539 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0644, st_size=217990208, ...}) = 0
+3038539 mmap(NULL, 217990208, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f40f6cbf000
+3038539 close(3)                        = 0
+3038539 write(2, "No open for you!\n", 17) = 17
+3038539 openat(AT_FDCWD, "/usr/lib64/gconv/gconv-modules.cache", O_RDONLY) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0644, st_size=26998, ...}) = 0
+3038539 mmap(NULL, 26998, PROT_READ, MAP_SHARED, 3, 0) = 0x7f4103fae000
+3038539 close(3)                        = 0
+3038539 futex(0x7f4103f30494, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+3038539 openat(AT_FDCWD, "Makefile", O_RDONLY) = 3
+3038539 fstat(3, {st_mode=S_IFREG|0664, st_size=779, ...}) = 0
+3038539 read(3, "SRC = $(wildcard *.snarl.md)\nMDDOC = $(SRC:.snarl.md=.md)\nHTMLDOC = $(SRC:.snarl"..., 4096) = 779
+3038539 fstat(1, {st_mode=S_IFREG|0664, st_size=0, ...}) = 0
+3038539 read(3, "", 4096)               = 0
+3038539 close(3)                        = 0
+3038539 write(1, "1\nSRC = $(wildcard *.snarl.md)\n2\nMDDOC = $(SRC:.snarl.md=.md)\n3\nHTMLDOC = $(SRC:"..., 896) = 896
+3038539 close(1)                        = 0
+3038539 close(2)                        = 0
+3038539 exit_group(0)                   = ?
+3038539 +++ exited with 0 +++
