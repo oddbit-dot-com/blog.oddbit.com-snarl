@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocs-example
+  labels:
+    app: ocs-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocs-example
+  template:
+    metadata:
+      labels:
+        app: ocs-example
+    spec:
+      containers:
+        - env:
+            - name: AWS_CA_BUNDLE
+              value: /run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+          envFrom:
+            - configMapRef:
+                name: example-rgw
+            - secretRef:
+                name: example-rgw
+          args:
+            - sleep
+            - inf
+          volumeMounts:
+            - name: docker-entrypoint-sh
+              mountPath: /docker-entrypoint.sh
+              subPath: docker-entrypoint.sh
+          image: larsks/awscli
+          name: rgw
+          resources: {}
+          restartPolicy: Always
+
+        - env:
+            - name: AWS_CA_BUNDLE
+              value: /run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+          envFrom:
+            - configMapRef:
+                name: example-noobaa
+            - secretRef:
+                name: example-noobaa
+          command:
+            - sh
+            - /docker-entrypoint.sh
+          args:
+            - sleep
+            - inf
+          volumeMounts:
+            - name: docker-entrypoint-sh
+              mountPath: /docker-entrypoint.sh
+              subPath: docker-entrypoint.sh
+          image: larsks/awscli
+          name: noobaa
+          resources: {}
+          restartPolicy: Always
+
+      volumes:
+        - name: docker-entrypoint-sh
+          configMap:
+            name: docker-entrypoint-sh

@@ -1,0 +1,6 @@
+namespace: oddbit-ocs-example
+
+resources:
+  - obc-noobaa.yml
+  - obc-rgw.yml
+  - deployment.yml
